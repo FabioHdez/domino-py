@@ -20,26 +20,22 @@ def main():
     # ACTUAL GAME
     table = []
     end = False
+
+    # Check if the table is empty so that the first player can start the game
+    if not table:
+        print(f"{players[0].name} - pieces: ")
+        print(players[0].pieces)
+        choice = int(input(f"{players[0].name} - Choose a starting piece: "))
+        print (players[0].pieces[choice])
+        table.append(players[0].pieces[choice])
+        players.insert(len(players),players.pop(0))
+        print(table)
+        print('-------------------------------------------------------')
+
     while(end == False):
         tableStatus = len(table)
         for player in range(playerNum):
             choice = "pass"
-            # THIS IF STATEMENT CHECKS IF THE TABLE IS EMPTY SO THAT THE FIRST
-            # PLAYER CAN START THE GAME
-            # Not ideal to check if table is empty every turn performance-wise
-            # but this way offers more concise code.
-            if not table:
-                print(f"{players[0].name} - pieces: ")
-                print(players[0].pieces)
-                choice = input(f"{players[0].name} - Choose a starting piece: ")
-                print (choice)
-                table.append(choice)
-                print(table)
-                print('-------------------------------------------------------')
-
-                continue
-
-            # Normal turn
             print(table)
             print(f"{players[player].name} - pieces: ")
             print(players[player].pieces)
@@ -64,10 +60,8 @@ class Player:
     def __init__(self, name, pieces):
         self.name = name
         self.pieces = pieces
-    def getPieces(self):
-        print(self.pieces)
-
-
+    # def check(self,table):
+    #     if table :
 
 if __name__ == '__main__':
     main()

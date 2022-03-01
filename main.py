@@ -55,13 +55,23 @@ def createPieces():
                     pieces.remove(piece)
     return pieces
 
-
 class Player:
     def __init__(self, name, pieces):
         self.name = name
         self.pieces = pieces
-    # def check(self,table):
-    #     if table :
+    # checks if player can play. returns true or false
+    def check(self,table):
+        left = table[0][0]
+        right = table[-1][-1]
+        for piece in self.pieces:
+            for num in pieces:
+                if num == left or num == right:
+                    return True
+                else:
+                    return False
+    def play(self,table):
+        if(self.check(self,table)):
+            print("play")
 
 if __name__ == '__main__':
     main()

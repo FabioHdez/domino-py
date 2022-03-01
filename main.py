@@ -2,14 +2,27 @@ import random
 
 def main():
     # create pieces
-    pieces = resetPieces()
-    p1Hand = selectPieces(pieces)
+    pieces = createPieces()
 
-    p1 = Player("Fabio", pieces)
+    # shuffle them
+    random.shuffle(pieces)
 
-    # create players
+    # Get input to get num of players (2 or 4)
+    playerNum = int(input("Please enter the number of players: "))
 
-def resetPieces():
+    # Create players
+    players = []
+    for player in range(playerNum):
+        name = input(f"Enter player {player+1}'s name:")
+        players.append(Player(name, pieces[:10]))
+        del pieces[:10]
+
+    # Select wether playing with people or COMP
+    # ADD LATER
+
+
+#Creates a list with all the pieces in the game
+def createPieces():
     pieces = []
     for i in range(10):
         for j in range(10):
@@ -19,12 +32,8 @@ def resetPieces():
                     pieces.remove(piece)
     return pieces
 
-# def selectPieces(pieces):
-#     hand = []
-#     while len(hand) < 10:
-#         index = random.randint(0,len(pieces))
-#
-#     print(hand)
+# Gets the current pieces and selects the amount for each hand
+# def selectPieces(pieces,handSize):
 
 
 

@@ -25,11 +25,10 @@ def main():
     if not table:
         print(f"{players[0].name} - pieces: ")
         print(players[0].pieces)
-        choice = int(input(f"{players[0].name} - Choose a starting piece: "))
-        print (players[0].pieces[choice])
+        choice = int(input(f"{players[0].name} - Choose a starting piece: ")) -1
         table.append(players[0].pieces[choice])
+        players[0].pieces.pop(choice)
         players.insert(len(players),players.pop(0))
-        print(table)
         print('-------------------------------------------------------')
 
     while(end == False):
@@ -39,6 +38,7 @@ def main():
             print(table)
             print(f"{players[player].name} - pieces: ")
             print(players[player].pieces)
+            players[player].play(table)
             print('-------------------------------------------------------')
 
         if tableStatus == len(table):
@@ -64,13 +64,12 @@ class Player:
         left = table[0][0]
         right = table[-1][-1]
         for piece in self.pieces:
-            for num in pieces:
+            for num in piece:
                 if num == left or num == right:
                     return True
-                else:
-                    return False
+        return False
     def play(self,table):
-        if(self.check(self,table)):
+        if(self.check(table)):
             print("play")
 
 if __name__ == '__main__':

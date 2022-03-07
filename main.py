@@ -34,12 +34,11 @@ def main():
     while(end == False):
         tableStatus = len(table)
         for player in range(playerNum):
-            choice = "pass"
-            print(table)
+            print(f"TABLE: \n {table} \n")
             print(f"{players[player].name} - pieces: ")
             print(players[player].pieces)
             players[player].play(table)
-            print('-------------------------------------------------------')
+            print('------------------------------------------------------- \n')
 
         if tableStatus == len(table):
             end = True
@@ -69,8 +68,12 @@ class Player:
                     return True
         return False
     def play(self,table):
+        left = table[0][0]
+        right = table[-1][-1]
         if(self.check(table)):
-            print("play")
+            choice = int(input(f"{self.name} - Choose piece: ")) -1
+            table.append(self.pieces[choice])
+            self.pieces.pop(choice)
 
 if __name__ == '__main__':
     main()

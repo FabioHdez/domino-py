@@ -33,10 +33,15 @@ def main():
         players.insert(len(players),players.pop(0))
         print('------------------------------------------------------- \n')
 
+    # the game will last until each player cannot place any pieces or a player
+    # runs out of pieces.
     turn = 1
     while(end == False):
         tableStatus = len(table)
         for player in range(playerNum):
+            if len(players[player].pieces) == 0:
+                end = True
+                break
             print(f"TABLE: Turn: {turn} \n {table} \n")
             print(f"{players[player].name} - pieces: ")
             print(players[player].pieces)
@@ -71,9 +76,12 @@ class Player:
                 if num == left or num == right:
                     return True
         return False
-
+    # called every turn, it organizes the table by flipping the pieces if needed
+    # would be more effective if it only checked the last piece that was played!
     def orderTable(self,table, start):
         startIndex = table.index(start)
+
+        #Check to the right of the start
         for x in range(startIndex,len(table)-1):
             if(table[x][-1] != table[x+1][0]):
                 table[x+1].insert(len(table[x+1]),table[x+1].pop(0))
@@ -101,14 +109,14 @@ class Player:
                     playeable_left = True
                 elif num == right:
                     playeable_right = True
-
+            # Select a side if the user can play from both
             if playeable_left and playeable_right:
                 side = input("Choose a side (left/right): ")
                 if side == "left":
                     playeable_right = False
                 elif side == "right":
                     playeable_left = False
-
+            # play on a side or pick another piece if there was an invalid input
             if playeable_left:
                 print("Playing on the left")
                 table.insert(0,self.pieces[choice])

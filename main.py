@@ -31,13 +31,15 @@ def main():
         players.insert(len(players),players.pop(0))
         print('------------------------------------------------------- \n')
 
+    turn = 1
     while(end == False):
         tableStatus = len(table)
         for player in range(playerNum):
-            print(f"TABLE: \n {table} \n")
+            print(f"TABLE: Turn: {turn} \n {table} \n")
             print(f"{players[player].name} - pieces: ")
             print(players[player].pieces)
             players[player].play(table)
+            turn+=1
             print('------------------------------------------------------- \n')
 
         if tableStatus == len(table):
@@ -89,10 +91,19 @@ class Player:
             if playeable_left and playeable_right:
                 side = input("Choose a side (left/right): ")
                 print(f"Playin on the {side}")
-            elif playeable_left:
+                if side == "left":
+                    playeable_right = False
+                elif side == "right":
+                    playeable_left = False
+
+            if playeable_left:
                 print("Playing on the left")
+                table.insert(0,self.pieces[choice])
+                self.pieces.pop(choice)
             elif playeable_right:
                 print("Playing on the right")
+                table.append(self.pieces[choice])
+                self.pieces.pop(choice)
             else:
                 print(f"{self.pieces[choice]} is not valid. Pick another piece")
                 # recall play func in case that the player chooses wrong piece

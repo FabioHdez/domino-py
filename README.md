@@ -13,7 +13,7 @@ Project is created with:
 * Python: 3.8
 	
 ## Setup
-To run this project, install it locally using npm:
+To run this project, just run the main.py file.
 
 ```
 $ cd ../domino-py

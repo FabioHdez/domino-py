@@ -19,6 +19,7 @@ def main():
 
     # ACTUAL GAME
     table = []
+    start = None
     end = False
 
     # Check if the table is empty so that the first player can start the game
@@ -26,6 +27,7 @@ def main():
         print(f"{players[0].name} - pieces: ")
         print(players[0].pieces)
         choice = int(input(f"{players[0].name} - Choose a starting piece: ")) -1
+        start=players[0].pieces[choice]
         table.append(players[0].pieces[choice])
         players[0].pieces.pop(choice)
         players.insert(len(players),players.pop(0))
@@ -38,7 +40,7 @@ def main():
             print(f"TABLE: Turn: {turn} \n {table} \n")
             print(f"{players[player].name} - pieces: ")
             print(players[player].pieces)
-            players[player].play(table)
+            players[player].play(table,start)
             turn+=1
             print('------------------------------------------------------- \n')
 
@@ -69,7 +71,19 @@ class Player:
                 if num == left or num == right:
                     return True
         return False
-    def play(self,table):
+
+    def orderTable(self,table, start):
+        startIndex = table.index(start)
+        for x in range(startIndex,len(table)-1):
+            if(table[x][-1] != table[x+1][0]):
+                table[x+1].insert(len(table[x+1]),table[x+1].pop(0))
+
+        #Check to the left of the start
+        for x in range(startIndex,0,-1):
+            if(table[x][0] != table[x-1][-1]):
+                table[x-1].insert(len(table[x-1]),table[x-1].pop(0))
+
+    def play(self,table,start):
         left = table[0][0]
         right = table[-1][-1]
 
@@ -90,7 +104,6 @@ class Player:
 
             if playeable_left and playeable_right:
                 side = input("Choose a side (left/right): ")
-                print(f"Playin on the {side}")
                 if side == "left":
                     playeable_right = False
                 elif side == "right":
@@ -107,7 +120,7 @@ class Player:
             else:
                 print(f"{self.pieces[choice]} is not valid. Pick another piece")
                 # recall play func in case that the player chooses wrong piece
-                self.play(table)
-
+                self.play(table,start)
+            self.orderTable(table,start)
 if __name__ == '__main__':
     main()

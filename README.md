@@ -26,10 +26,15 @@ $ py main.py
 * The first player will choose a starting piece.
 * To choose a piece you need to input the index of your desired piece.
 
+![Starting the game](https://i.imgur.com/v91OK1u.png?1)
+
+
 ### The Game
 * The rules of the game are available at https://www.coololdgames.com/tile-games/dominoes/cuban/
 * Each turn you will be able to play a piece by inputting the index of your desired piece.
-* The image shown below shows where to find the table, player's piececs and the turn number.
+* The image below shows the table, player's pieces and the turn number.
+
+![The game](https://i.imgur.com/gbS7zUb.png)
 
 ### Winning the Game
 * The game will end when none of the players can play any pieces or when a player runs out of pieces.
